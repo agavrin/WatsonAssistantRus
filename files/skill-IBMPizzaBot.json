@@ -1,0 +1,751 @@
+{
+  "name": "IBMPizzaBot",
+  "intents": [
+    {
+      "intent": "выход",
+      "examples": [
+        {
+          "text": "отмена"
+        },
+        {
+          "text": "Стоп"
+        },
+        {
+          "text": "ЕЩЕ БОЛЬШЕ БОЛИ"
+        },
+        {
+          "text": "думаю, что хватит"
+        },
+        {
+          "text": "хватит ля"
+        },
+        {
+          "text": "АСТАНАВИСЬ"
+        },
+        {
+          "text": "достаточно"
+        },
+        {
+          "text": "Пока"
+        },
+        {
+          "text": "это все"
+        },
+        {
+          "text": "закончил"
+        },
+        {
+          "text": "хочу выйти"
+        },
+        {
+          "text": "выход"
+        }
+      ]
+    },
+    {
+      "intent": "помощь",
+      "examples": [
+        {
+          "text": "помощь"
+        },
+        {
+          "text": "я не понимаю"
+        },
+        {
+          "text": "что можно сделать"
+        },
+        {
+          "text": "помогите"
+        }
+      ]
+    },
+    {
+      "intent": "заказ",
+      "examples": [
+        {
+          "text": "я голоден"
+        },
+        {
+          "text": "я сегодня не обедал"
+        },
+        {
+          "text": "пуццу"
+        },
+        {
+          "text": "Хочу кока-колу"
+        },
+        {
+          "text": "я бы съел что-нибудь"
+        },
+        {
+          "text": "пицца"
+        },
+        {
+          "text": "можно мне пиццу"
+        },
+        {
+          "text": "заказ"
+        },
+        {
+          "text": "хочу пиццу"
+        },
+        {
+          "text": "хочу заказать пиццу"
+        },
+        {
+          "text": "хочу заказать большую пиццу"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "сброс",
+      "examples": [
+        {
+          "text": "начнем"
+        },
+        {
+          "text": "сброс"
+        },
+        {
+          "text": "сотри ввод"
+        },
+        {
+          "text": "начнем сначала"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "entity": "товар",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "кока-кола",
+          "synonyms": [
+            "кока-кола",
+            "кола"
+          ]
+        }
+      ]
+    },
+    {
+      "entity": "пицца_размер",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "маленькая",
+          "synonyms": [
+            "маленькую",
+            "маленькая"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "средняя",
+          "synonyms": [
+            "обычная",
+            "средняя",
+            "среднюю"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "большая",
+          "synonyms": [
+            "большая",
+            "большую"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "пицца_место",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "stay",
+          "synonyms": [
+            "ресторане",
+            "внутри",
+            "ресторан"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "go",
+          "synonyms": [
+            "на дом",
+            "доставка",
+            "с доставкой"
+          ]
+        }
+      ]
+    },
+    {
+      "entity": "пицца_добавки",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "оливки",
+          "synonyms": [
+            "оливок",
+            "оливками"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "пепперони",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "салями",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "сосиски",
+          "synonyms": [
+            "сосисками"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "сыр",
+          "synonyms": [
+            "сыром",
+            "Сыыыыр"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "анчоусы",
+          "synonyms": [
+            "анчоусами",
+            "анчоусов"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "ветчина",
+          "synonyms": [
+            "ветчиной",
+            "ветчины"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "грибы",
+          "synonyms": [
+            "грибами",
+            "грибов"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "лук",
+          "synonyms": [
+            "луком",
+            "лука"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "пицца_тип",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "вегетарианская",
+          "synonyms": [
+            "вегетарианскую"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "маргарита",
+          "synonyms": [
+            "маргариту"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "сырная",
+          "synonyms": [
+            "сырную",
+            "сирна"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "доптоппинги-подтвердить",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "да",
+          "synonyms": [
+            "да",
+            "конечно",
+            "разумеется"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "нет",
+          "synonyms": [
+            "нет",
+            "Не-а"
+          ]
+        }
+      ]
+    }
+  ],
+  "language": "en",
+  "metadata": {
+    "api_version": {
+      "major_version": "v1",
+      "minor_version": "2018-07-10"
+    }
+  },
+  "description": "Basic pizza ordering with optional topping, basic version with one attempt to provide toppings",
+  "dialog_nodes": [
+    {
+      "type": "event_handler",
+      "output": {
+        "text": {
+          "values": [
+            "Спасибо! размер пиццы - $pizza_size"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "slot_3_1494421237824",
+      "event_name": "filled",
+      "dialog_node": "handler_1_1521776765064",
+      "previous_sibling": "handler_5_1494421285663"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_3_1494421237824",
+      "context": {
+        "pizza_size": "@пицца_размер"
+      },
+      "metadata": {},
+      "conditions": "@пицца_размер",
+      "event_name": "input",
+      "dialog_node": "handler_5_1494421285663",
+      "previous_sibling": "handler_4_1494421274527"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "text": "Какого размера пицца (большая, средняя или маленькая)?"
+      },
+      "parent": "slot_3_1494421237824",
+      "metadata": {},
+      "event_name": "focus",
+      "dialog_node": "handler_4_1494421274527"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "text": {
+          "values": [
+            "Хорошо, что еще добавить? У нас есть пепперони, ветчина, грибы, лук, анчоусы и оливки."
+          ]
+        }
+      },
+      "parent": "slot_1_1494704123064",
+      "metadata": {},
+      "conditions": "@доптоппинги-подтвердить:да",
+      "event_name": "nomatch",
+      "dialog_node": "handler_8_1500493007853",
+      "previous_sibling": "handler_4_1494704594631"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "text": {
+          "values": [
+            "Хорошо, добавляю к заказу @пицца_добавки.length добавки к пицце."
+          ]
+        }
+      },
+      "parent": "slot_1_1494704123064",
+      "metadata": {},
+      "conditions": "@пицца_добавки.length > 1",
+      "event_name": "filled",
+      "dialog_node": "handler_6_1494704751936",
+      "previous_sibling": "handler_5_1494704673688"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_1_1494704123064",
+      "context": {
+        "pizza_toppings": "@пицца_добавки.values"
+      },
+      "metadata": {},
+      "conditions": "@пицца_добавки.values",
+      "event_name": "input",
+      "dialog_node": "handler_2_1494704151628",
+      "previous_sibling": "handler_3_1494704424215"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "text": {
+          "values": []
+        }
+      },
+      "parent": "slot_1_1494704123064",
+      "metadata": {},
+      "event_name": "filled",
+      "dialog_node": "handler_4_1500489535722",
+      "previous_sibling": "handler_6_1494704751936"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "text": {
+          "values": [
+            "Хорошо, без дополнительных топпингов"
+          ]
+        }
+      },
+      "parent": "slot_1_1494704123064",
+      "context": {
+        "pizza_toppings": ""
+      },
+      "metadata": {},
+      "conditions": "@доптоппинги-подтвердить:нет",
+      "event_name": "nomatch",
+      "dialog_node": "handler_4_1494704594631",
+      "previous_sibling": "handler_4_1500489535722"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "text": {
+          "values": [
+            "Хорошо, добавляю дополнительно @пицца_добавки."
+          ]
+        }
+      },
+      "parent": "slot_1_1494704123064",
+      "metadata": {},
+      "conditions": "@пицца_добавки.length == 1",
+      "event_name": "filled",
+      "dialog_node": "handler_5_1494704673688",
+      "previous_sibling": "handler_2_1494704151628"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "text": "Еще что-то добавить?"
+      },
+      "parent": "slot_1_1494704123064",
+      "metadata": {},
+      "event_name": "focus",
+      "dialog_node": "handler_3_1494704424215"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_6_1494421302730",
+      "context": {
+        "pizza_type": "@пицца_тип"
+      },
+      "metadata": {},
+      "conditions": "@пицца_тип",
+      "event_name": "input",
+      "dialog_node": "handler_8_1494421347721",
+      "previous_sibling": "handler_7_1494421336855"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "text": {
+          "values": []
+        }
+      },
+      "parent": "slot_6_1494421302730",
+      "conditions": "",
+      "event_name": "filled",
+      "dialog_node": "handler_5_1500492489376",
+      "previous_sibling": "handler_8_1494421347721"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "text": "Какой тип пиццы предпочитаете? Сырная, маргарита или вегетарианская?"
+      },
+      "parent": "slot_6_1494421302730",
+      "metadata": {},
+      "event_name": "focus",
+      "dialog_node": "handler_7_1494421336855"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_16_1501069677090",
+      "event_name": "focus",
+      "dialog_node": "handler_18_1501069677090",
+      "previous_sibling": "handler_17_1501069677090"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_16_1501069677090",
+      "context": {
+        "pizza_place": "@пицца_место"
+      },
+      "metadata": {},
+      "conditions": "@пицца_место",
+      "event_name": "input",
+      "dialog_node": "handler_17_1501069677090"
+    },
+    {
+      "type": "slot",
+      "output": {},
+      "parent": "Pizza ordering",
+      "metadata": {},
+      "variable": "$pizza_size",
+      "dialog_node": "slot_3_1494421237824",
+      "previous_sibling": "node_8_1494705793073"
+    },
+    {
+      "type": "slot",
+      "output": {},
+      "parent": "Pizza ordering",
+      "metadata": {},
+      "variable": "$pizza_type",
+      "dialog_node": "slot_6_1494421302730",
+      "previous_sibling": "slot_3_1494421237824"
+    },
+    {
+      "type": "slot",
+      "output": {},
+      "parent": "Pizza ordering",
+      "metadata": {},
+      "variable": "$pizza_place",
+      "dialog_node": "slot_16_1501069677090",
+      "previous_sibling": "slot_1_1494704123064"
+    },
+    {
+      "type": "slot",
+      "output": {},
+      "parent": "Pizza ordering",
+      "metadata": {},
+      "variable": "$pizza_toppings",
+      "dialog_node": "slot_1_1494704123064",
+      "previous_sibling": "slot_6_1494421302730"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "text": {
+          "values": [
+            "Спасибо за заказ пиццы - $pizza_size $pizza_type с добавками - <? $pizza_toppings.join(', ') ?>."
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "Pizza ordering",
+      "metadata": {},
+      "conditions": " $pizza_toppings && $pizza_toppings.size()>0",
+      "dialog_node": "node_19_1501070902849",
+      "previous_sibling": "node_1_1521569455964"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "text": {
+          "values": [
+            "Спасибо за заказ пиццы - $pizza_size $pizza_type."
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "Pizza ordering",
+      "metadata": {},
+      "dialog_node": "node_8_1494705793073",
+      "previous_sibling": "node_19_1501070902849"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "text": {
+          "values": [
+            "Хорошо, начнем сначала."
+          ]
+        }
+      },
+      "parent": "Pizza ordering",
+      "metadata": {},
+      "conditions": "#сброс",
+      "event_name": "generic",
+      "dialog_node": "handler_11_1500495509073",
+      "previous_sibling": "handler_10_1500495433159"
+    },
+    {
+      "type": "standard",
+      "title": "Hangup",
+      "output": {
+        "text": {
+          "values": [
+            "До свидания!"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "Pizza ordering",
+      "context": {
+        "status": "hangup",
+        "pizza_size": null,
+        "pizza_type": null,
+        "pizza_place": null,
+        "pizza_toppings": null
+      },
+      "metadata": {},
+      "dialog_node": "node_1_1521569455964",
+      "previous_sibling": "node_7_1494705728892"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "text": {
+          "values": [
+            "Спасибо за заказ пицца - $pizza_size $pizza_type с <? $pizza_toppings.join(', ') ?> . Мы сделаем ее  <?$pizza_place == 'stay'? 'в ресторане.' :  ' с доставкой на дом'?>."
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "Pizza ordering",
+      "metadata": {},
+      "conditions": "$pizza_toppings && $pizza_toppings.size()>0 && $pizza_place",
+      "dialog_node": "node_7_1494705728892",
+      "previous_sibling": "handler_11_1500495509073"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "text": {
+          "values": [
+            "Вы можете выбрать размер пиццы (маленькая, средняя, большая), тип (сырная, маргарита, вегетарианская) и дополнительные ингредиенты."
+          ]
+        }
+      },
+      "parent": "Pizza ordering",
+      "metadata": {},
+      "conditions": "#помощь",
+      "event_name": "generic",
+      "dialog_node": "handler_10_1500495433159"
+    },
+    {
+      "type": "standard",
+      "title": "Сброс",
+      "output": {
+        "text": {
+          "values": [
+            "Начнем сначала."
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "context": {
+        "status": "hangup",
+        "pizza_size": null,
+        "pizza_type": null,
+        "pizza_place": null,
+        "pizza_toppings": null
+      },
+      "metadata": {},
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "body",
+        "dialog_node": "Welcome"
+      },
+      "conditions": "#сброс",
+      "dialog_node": "Reset",
+      "previous_sibling": "Pizza ordering"
+    },
+    {
+      "type": "standard",
+      "title": "Fallback",
+      "output": {
+        "text": {
+          "values": [
+            "Вы можете заказать пиццу. Размер - большой, средний или маленький. Тип пиццы - сырная, маргарита или вегетарианская.",
+            "Вы можете заказать, например, сырную пиццу. К ней можно добавить пепперони, ветчину, оливки, анчоусы, грибы или салями."
+          ],
+          "selection_policy": "random"
+        }
+      },
+      "context": {},
+      "metadata": {},
+      "conditions": "anything_else",
+      "dialog_node": "Fallback",
+      "previous_sibling": "node_1_1522669657203"
+    },
+    {
+      "type": "standard",
+      "title": "Переход на оператора",
+      "output": {
+        "text": {
+          "values": [
+            "Переводим вас на оператора..."
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "metadata": {},
+      "conditions": "$QuestionCounter>2",
+      "digress_in": "does_not_return",
+      "dialog_node": "node_1_1522669657203",
+      "previous_sibling": "Reset"
+    },
+    {
+      "type": "frame",
+      "title": "Заказ пиццы",
+      "output": {},
+      "metadata": {
+        "fallback": "leave"
+      },
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "body",
+        "dialog_node": "node_1_1521569455964"
+      },
+      "conditions": "#заказ",
+      "dialog_node": "Pizza ordering",
+      "previous_sibling": "Welcome"
+    },
+    {
+      "type": "standard",
+      "title": "Приветствие",
+      "output": {
+        "text": {
+          "values": [
+            "Добро пожаловать, вы можете заказать пиццу. Что желаете?"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "metadata": {},
+      "conditions": "welcome",
+      "dialog_node": "Welcome"
+    }
+  ],
+  "workspace_id": "3c697d00-1a07-4ff3-962e-53e1c65ab9ff",
+  "counterexamples": [],
+  "learning_opt_out": false,
+  "status": "Available"
+}
