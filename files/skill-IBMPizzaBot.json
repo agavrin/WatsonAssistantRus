@@ -46,16 +46,19 @@
       "intent": "помощь",
       "examples": [
         {
-          "text": "помощь"
+          "text": "я не понимаю"
         },
         {
-          "text": "я не понимаю"
+          "text": "помощь"
         },
         {
           "text": "что можно сделать"
         },
         {
           "text": "помогите"
+        },
+        {
+          "text": "Привет Как дела"
         }
       ]
     },
@@ -63,13 +66,13 @@
       "intent": "заказ",
       "examples": [
         {
-          "text": "я голоден"
-        },
-        {
           "text": "я сегодня не обедал"
         },
         {
           "text": "пуццу"
+        },
+        {
+          "text": "я голоден"
         },
         {
           "text": "Хочу кока-колу"
@@ -260,6 +263,15 @@
       "values": [
         {
           "type": "synonyms",
+          "value": "сырная",
+          "synonyms": [
+            "сырную",
+            "сирна",
+            "сырным"
+          ]
+        },
+        {
+          "type": "synonyms",
           "value": "вегетарианская",
           "synonyms": [
             "вегетарианскую"
@@ -270,14 +282,6 @@
           "value": "маргарита",
           "synonyms": [
             "маргариту"
-          ]
-        },
-        {
-          "type": "synonyms",
-          "value": "сырная",
-          "synonyms": [
-            "сырную",
-            "сирна"
           ]
         }
       ],
@@ -310,7 +314,7 @@
   "metadata": {
     "api_version": {
       "major_version": "v1",
-      "minor_version": "2018-07-10"
+      "minor_version": "2018-09-20"
     }
   },
   "description": "Basic pizza ordering with optional topping, basic version with one attempt to provide toppings",
@@ -320,12 +324,13 @@
       "output": {
         "text": {
           "values": [
-            "Спасибо! размер пиццы - $pizza_size"
+            "Хорошо! Размер пиццы - $pizza_size."
           ],
           "selection_policy": "sequential"
         }
       },
       "parent": "slot_3_1494421237824",
+      "metadata": {},
       "event_name": "filled",
       "dialog_node": "handler_1_1521776765064",
       "previous_sibling": "handler_5_1494421285663"
@@ -346,7 +351,7 @@
     {
       "type": "event_handler",
       "output": {
-        "text": "Какого размера пицца (большая, средняя или маленькая)?"
+        "text": "Какого размера вы хотели бы пиццу (большую, среднюю или маленькую)?"
       },
       "parent": "slot_3_1494421237824",
       "metadata": {},
@@ -374,13 +379,13 @@
       "output": {
         "text": {
           "values": [
-            "Хорошо, добавляю к заказу @пицца_добавки.length добавки к пицце."
+            "К вашему заказу добавлю два топпинга."
           ]
         }
       },
       "parent": "slot_1_1494704123064",
       "metadata": {},
-      "conditions": "@пицца_добавки.length > 1",
+      "conditions": "@пицца_добавки.length == 2",
       "event_name": "filled",
       "dialog_node": "handler_6_1494704751936",
       "previous_sibling": "handler_5_1494704673688"
@@ -402,11 +407,14 @@
       "type": "event_handler",
       "output": {
         "text": {
-          "values": []
+          "values": [
+            "К вашему заказу добавлю @пицца_добавки.length топпинга."
+          ]
         }
       },
       "parent": "slot_1_1494704123064",
       "metadata": {},
+      "conditions": "@пицца_добавки.length > 2",
       "event_name": "filled",
       "dialog_node": "handler_4_1500489535722",
       "previous_sibling": "handler_6_1494704751936"
@@ -435,7 +443,7 @@
       "output": {
         "text": {
           "values": [
-            "Хорошо, добавляю дополнительно @пицца_добавки."
+            "К вашему заказу добавлю @пицца_добавки."
           ]
         }
       },
@@ -485,7 +493,7 @@
     {
       "type": "event_handler",
       "output": {
-        "text": "Какой тип пиццы предпочитаете? Сырная, маргарита или вегетарианская?"
+        "text": "Какой тип пиццы предпочитаете? Вы можете выбрать сырную, маргариту или вегетарианскую."
       },
       "parent": "slot_6_1494421302730",
       "metadata": {},
@@ -553,7 +561,7 @@
       "output": {
         "text": {
           "values": [
-            "Спасибо за заказ пиццы - $pizza_size $pizza_type с добавками - <? $pizza_toppings.join(', ') ?>."
+            "Спасибо за заказ пиццы - $pizza_size $pizza_type. Мы добавим: <? $pizza_toppings.join(', ') ?>. Ваш заказ передан в производство."
           ],
           "selection_policy": "sequential"
         }
@@ -569,7 +577,7 @@
       "output": {
         "text": {
           "values": [
-            "Спасибо за заказ пиццы - $pizza_size $pizza_type."
+            "Спасибо за заказ пиццы - $pizza_size $pizza_type. Ваш заказ передан в производство."
           ],
           "selection_policy": "sequential"
         }
@@ -623,7 +631,7 @@
       "output": {
         "text": {
           "values": [
-            "Спасибо за заказ пицца - $pizza_size $pizza_type с <? $pizza_toppings.join(', ') ?> . Мы сделаем ее  <?$pizza_place == 'stay'? 'в ресторане.' :  ' с доставкой на дом'?>."
+            "Спасибо за заказ! Пицца - $pizza_size $pizza_type с <? $pizza_toppings.join(', ') ?> . Мы сделаем ее  <?$pizza_place == 'stay'? 'в ресторане.' :  ' с доставкой на дом'?>."
           ],
           "selection_policy": "sequential"
         }
