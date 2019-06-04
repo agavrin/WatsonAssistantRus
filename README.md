@@ -1,10 +1,11 @@
+<<<<<<< HEAD
 # Лабораторные работы по IBM Watson Assistant
 
 ## Описание
 IBM Watson Asistant - чат-бот платформа IBM.
 
-## Лабораторные работы
+# IBM Watson Assistant - Лабораторные работы
+Этот репозиторий содержит лабораторные работы для тестирования чат-бот платформы IBM Watson Assistant
+  - <a href="7.%20Nodered-Telegram.md">Интеграция с telegram</a>
+  - <a href="7A.%20Integration-with-Voximplant.md">Интеграция с платформой voximplant</a>
 
-<a href="./1.+Nodered-Telegram.md">Лабораторная работа №1. Интеграция Assistant, Visual Recognition, Language Translator и Telegram с использованием Node-red</a>
-
-<a href="./2.+Integration-with-Voximplant.md">Лабораторная работа №2. Интеграция Watson Assistant и телефонии</a>
