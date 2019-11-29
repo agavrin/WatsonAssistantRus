@@ -1,355 +1,427 @@
 [
-  {
-    "id": "5b3f91be.e31f7",
-    "type": "tab",
-    "label": "IBMPizzaTestBot",
-    "disabled": false,
-    "info": ""
-  },
-  {
-    "id": "c1d49100.49808",
-    "type": "function",
-    "z": "5b3f91be.e31f7",
-    "name": "Сохранить контекст",
-    "func": "context.flow.chatId = msg.payload.chatId;\ncontext.flow.type = msg.payload.type;\ncontext.QuestionCounter=1;\nmsg.payload = msg.payload.content;\nreturn msg;",
-    "outputs": 1,
-    "noerr": 0,
-    "x": 432.5,
-    "y": 43.062530517578125,
-    "wires": [
-      [
-        "2e80e6c.aca4d1a"
+   {
+      "id":"5b3f91be.e31f7",
+      "type":"tab",
+      "label":"IBMPizzaTestBot",
+      "disabled":false,
+      "info":""
+   },
+   {
+      "id":"c1d49100.49808",
+      "type":"function",
+      "z":"5b3f91be.e31f7",
+      "name":"Вспомнить сессию",
+      "func":"context.flow.chatId = msg.payload.chatId;\ncontext.flow.type = msg.payload.type;\n\n// If there is no context mykeys object yet, create it\nif(context.flow.mykeys===undefined) context.flow.mykeys={}\n\n// Checking if session already exists\nif(context.flow.mykeys[msg.payload.chatId]!==undefined) {\n    // If session already exists\n    msg.params={}\n    msg.params.session_id=context.flow.mykeys[msg.payload.chatId]\n    //msg.params.session_id=\"95909020-93a2-42aa-8f15-17e93a8acd84\"\n}\n\nmsg.payload = msg.payload.content;\n//node.warn(context);\nreturn msg;",
+      "outputs":1,
+      "noerr":0,
+      "x":660,
+      "y":40,
+      "wires":[
+         [
+            "1625bed2.bd4381",
+            "f2d8c21a.a0d83"
+         ]
       ]
-    ]
-  },
-  {
-    "id": "2e80e6c.aca4d1a",
-    "type": "watson-conversation-v1",
-    "z": "5b3f91be.e31f7",
-    "name": "Watson Assistant",
-    "workspaceid": "3c697d00-1a07-4ff3-962e-53e1c65ab9ff",
-    "multiuser": false,
-    "context": true,
-    "empty-payload": false,
-    "default-endpoint": true,
-    "service-endpoint": "https://gateway.watsonplatform.net/conversation/api",
-    "timeout": "",
-    "optout-learning": false,
-    "x": 677.625,
-    "y": 73.31253051757812,
-    "wires": [
-      [
-        "768bd5b2.2f153c",
-        "c054f5e7.925108"
+   },
+   {
+      "id":"81d79414.7e6dd8",
+      "type":"function",
+      "z":"5b3f91be.e31f7",
+      "name":"Not authorized user",
+      "func":"msg.payload.content = \"You're not authorized user\";\nreturn msg;",
+      "outputs":1,
+      "noerr":0,
+      "x":350,
+      "y":520,
+      "wires":[
+         [
+            "c7699fbe.29754"
+         ]
       ]
-    ]
-  },
-  {
-    "id": "768bd5b2.2f153c",
-    "type": "function",
-    "z": "5b3f91be.e31f7",
-    "name": "Вспомнить контекст",
-    "func": "msg.payload.chatId = context.flow.chatId;\nmsg.payload.type = context.flow.type;\na=msg.payload.output.text\nmsg.payload.content=\"\"\n\na.forEach(function(element) {\n  msg.payload.content=msg.payload.content+element+\" \";\n});\n\n//msg.payload.content = msg.payload.output.text[0];\nreturn msg;",
-    "outputs": 1,
-    "noerr": 0,
-    "x": 839,
-    "y": 136.25003051757812,
-    "wires": [
-      [
-        "c7699fbe.29754"
+   },
+   {
+      "id":"cc38bf5.291fd4",
+      "type":"comment",
+      "z":"5b3f91be.e31f7",
+      "name":"Read.me",
+      "info":"1) Create a Watson Conversation on IBM Cloud (https://www.bluemix.net)\n2) Create a Telegram Bot:\n   Open web.telegram.org\n   find BotFather (contact)\n   send /newbot\n   Give a name for your bot (Botfather will ask it)\n   Give a user name for it, which should have in the end \"Bot\"\n   The BotFather will give you a token.\n   ",
+      "x":80,
+      "y":60,
+      "wires":[
+
       ]
-    ]
-  },
-  {
-    "id": "81d79414.7e6dd8",
-    "type": "function",
-    "z": "5b3f91be.e31f7",
-    "name": "Not authorized user",
-    "func": "msg.payload.content = \"You're not authorized user\";\nreturn msg;",
-    "outputs": 1,
-    "noerr": 0,
-    "x": 239.75,
-    "y": 601.75,
-    "wires": [
-      [
-        "c7699fbe.29754"
+   },
+   {
+      "id":"6f8d6c41.333f34",
+      "type":"telegram receiver",
+      "z":"5b3f91be.e31f7",
+      "name":"",
+      "bot":"e913f44.a55b208",
+      "saveDataDir":"",
+      "x":96,
+      "y":210.31253051757812,
+      "wires":[
+         [
+            "b7c194a1.6ac5e8"
+         ],
+         [
+            "81d79414.7e6dd8"
+         ]
       ]
-    ]
-  },
-  {
-    "id": "cc38bf5.291fd4",
-    "type": "comment",
-    "z": "5b3f91be.e31f7",
-    "name": "Read.me",
-    "info": "1) Create a Watson Conversation on IBM Cloud (https://www.bluemix.net)\n2) Create a Telegram Bot:\n   Open web.telegram.org\n   find BotFather (contact)\n   send /newbot\n   Give a name for your bot (Botfather will ask it)\n   Give a user name for it, which should have in the end \"Bot\"\n   The BotFather will give you a token.\n   ",
-    "x": 81.5,
-    "y": 84,
-    "wires": []
-  },
-  {
-    "id": "6f8d6c41.333f34",
-    "type": "telegram receiver",
-    "z": "5b3f91be.e31f7",
-    "name": "",
-    "bot": "e913f44.a55b208",
-    "saveDataDir": "",
-    "x": 96,
-    "y": 210.31253051757812,
-    "wires": [
-      [
-        "b7c194a1.6ac5e8"
+   },
+   {
+      "id":"c7699fbe.29754",
+      "type":"telegram sender",
+      "z":"5b3f91be.e31f7",
+      "name":"",
+      "bot":"e913f44.a55b208",
+      "x":940,
+      "y":520,
+      "wires":[
+         [
+
+         ]
+      ]
+   },
+   {
+      "id":"110f1b8d.f3a394",
+      "type":"visual-recognition-v3",
+      "z":"5b3f91be.e31f7",
+      "name":"Watson Visual Recognition",
+      "vr-service-endpoint":"https://gateway.watsonplatform.net/visual-recognition/api",
+      "image-feature":"classifyImage",
+      "lang":"en",
+      "x":440,
+      "y":280,
+      "wires":[
+         [
+            "519afded.0ee064",
+            "c054f5e7.925108"
+         ]
+      ]
+   },
+   {
+      "id":"64f5f156.9b0fe",
+      "type":"function",
+      "z":"5b3f91be.e31f7",
+      "name":"Подготовка для распознавания",
+      "func":"context.flow.chatId = msg.payload.chatId;\ncontext.flow.type = msg.payload.type;\n\nmsg.payload=msg.payload.weblink;\nreturn msg;",
+      "outputs":1,
+      "noerr":0,
+      "x":460,
+      "y":220,
+      "wires":[
+         [
+            "110f1b8d.f3a394",
+            "c054f5e7.925108"
+         ]
+      ]
+   },
+   {
+      "id":"519afded.0ee064",
+      "type":"function",
+      "z":"5b3f91be.e31f7",
+      "name":"Подготовка для перевода",
+      "func":"context.flow.englishResult = msg.result.images[0].classifiers[0].classes[0].class;\n\nreturn { payload: msg.result.images[0].classifiers[0].classes[0].class} ;",
+      "outputs":1,
+      "noerr":0,
+      "x":440,
+      "y":340,
+      "wires":[
+         [
+            "120cdffe.a59fb",
+            "c054f5e7.925108"
+         ]
+      ]
+   },
+   {
+      "id":"b7c194a1.6ac5e8",
+      "type":"switch",
+      "z":"5b3f91be.e31f7",
+      "name":"Текст или фото?",
+      "property":"payload.type",
+      "propertyType":"msg",
+      "rules":[
+         {
+            "t":"eq",
+            "v":"message",
+            "vt":"str"
+         },
+         {
+            "t":"eq",
+            "v":"photo",
+            "vt":"str"
+         }
       ],
-      [
-        "81d79414.7e6dd8"
+      "checkall":"true",
+      "repair":false,
+      "outputs":2,
+      "x":330,
+      "y":120,
+      "wires":[
+         [
+            "c1d49100.49808"
+         ],
+         [
+            "64f5f156.9b0fe"
+         ]
       ]
-    ]
-  },
-  {
-    "id": "c7699fbe.29754",
-    "type": "telegram sender",
-    "z": "5b3f91be.e31f7",
-    "name": "",
-    "bot": "e913f44.a55b208",
-    "x": 890.75,
-    "y": 641.3125,
-    "wires": [
-      []
-    ]
-  },
-  {
-    "id": "110f1b8d.f3a394",
-    "type": "visual-recognition-v3",
-    "z": "5b3f91be.e31f7",
-    "name": "Watson Visual Recognition",
-    "vr-service-endpoint": "https://gateway.watsonplatform.net/visual-recognition/api",
-    "image-feature": "classifyImage",
-    "lang": "en",
-    "x": 616.6111450195312,
-    "y": 316.97918701171875,
-    "wires": [
-      [
-        "519afded.0ee064",
-        "8f26eec9.545c"
+   },
+   {
+      "id":"495b5b4.619f0a4",
+      "type":"function",
+      "z":"5b3f91be.e31f7",
+      "name":"Подготовка ответа",
+      "func":"var newmsg = { \n    payload: \n    {\n        chatId:context.flow.chatId,\n        content: msg.payload+\" (\"+context.flow.englishResult+\")\",\n        type:\"message\"\n    } \n};\n\nreturn newmsg;\n",
+      "outputs":1,
+      "noerr":0,
+      "x":680,
+      "y":400,
+      "wires":[
+         [
+            "c7699fbe.29754",
+            "d67f3cf4.93eb2"
+         ]
       ]
-    ]
-  },
-  {
-    "id": "64f5f156.9b0fe",
-    "type": "function",
-    "z": "5b3f91be.e31f7",
-    "name": "Подготовка для распознавания",
-    "func": "context.flow.chatId = msg.payload.chatId;\ncontext.flow.type = msg.payload.type;\nmsg.payload=msg.payload.weblink;\nreturn msg;",
-    "outputs": 1,
-    "noerr": 0,
-    "x": 596.6111145019531,
-    "y": 247.8680877685547,
-    "wires": [
-      [
-        "110f1b8d.f3a394"
+   },
+   {
+      "id":"120cdffe.a59fb",
+      "type":"watson-translator",
+      "z":"5b3f91be.e31f7",
+      "name":"Watson Language Translator",
+      "action":"translate",
+      "basemodel":"en-nl",
+      "domain":"general",
+      "srclang":"en",
+      "destlang":"ru",
+      "password":"cV5vSP7sXY3F",
+      "apikey":"",
+      "custom":"",
+      "domainhidden":"general",
+      "srclanghidden":"en",
+      "destlanghidden":"ru",
+      "basemodelhidden":"en-nl",
+      "customhidden":"",
+      "filetype":"forcedglossary",
+      "trainid":"",
+      "lgparams2":true,
+      "neural":false,
+      "default-endpoint":true,
+      "service-endpoint":"https://gateway.watsonplatform.net/language-translator/api",
+      "x":440,
+      "y":400,
+      "wires":[
+         [
+            "495b5b4.619f0a4"
+         ]
       ]
-    ]
-  },
-  {
-    "id": "519afded.0ee064",
-    "type": "function",
-    "z": "5b3f91be.e31f7",
-    "name": "Подготовка для перевода",
-    "func": "context.flow.englishResult = msg.result.images[0].classifiers[0].classes[0].class;\n\nreturn { payload: msg.result.images[0].classifiers[0].classes[0].class} ;",
-    "outputs": 1,
-    "noerr": 0,
-    "x": 605.8333129882812,
-    "y": 392.97918701171875,
-    "wires": [
-      [
-        "120cdffe.a59fb",
-        "c054f5e7.925108"
+   },
+   {
+      "id":"d67f3cf4.93eb2",
+      "type":"debug",
+      "z":"5b3f91be.e31f7",
+      "name":"Debug",
+      "active":true,
+      "tosidebar":true,
+      "console":false,
+      "tostatus":false,
+      "complete":"payload",
+      "targetType":"msg",
+      "x":910,
+      "y":400,
+      "wires":[
+
       ]
-    ]
-  },
-  {
-    "id": "b7c194a1.6ac5e8",
-    "type": "switch",
-    "z": "5b3f91be.e31f7",
-    "name": "Текст или фото?",
-    "property": "payload.type",
-    "propertyType": "msg",
-    "rules": [
-      {
-        "t": "eq",
-        "v": "message",
-        "vt": "str"
-      },
-      {
-        "t": "eq",
-        "v": "photo",
-        "vt": "str"
-      }
-    ],
-    "checkall": "true",
-    "repair": false,
-    "outputs": 2,
-    "x": 310,
-    "y": 160,
-    "wires": [
-      [
-        "c1d49100.49808"
-      ],
-      [
-        "64f5f156.9b0fe"
+   },
+   {
+      "id":"c054f5e7.925108",
+      "type":"debug",
+      "z":"5b3f91be.e31f7",
+      "name":"Debug",
+      "active":true,
+      "tosidebar":true,
+      "console":false,
+      "tostatus":false,
+      "complete":"payload",
+      "targetType":"msg",
+      "x":910,
+      "y":280,
+      "wires":[
+
       ]
-    ]
-  },
-  {
-    "id": "495b5b4.619f0a4",
-    "type": "function",
-    "z": "5b3f91be.e31f7",
-    "name": "Подготовка ответа",
-    "func": "var newmsg = { \n    payload: \n    {\n        chatId:context.flow.chatId,\n        content: msg.payload+\" (\"+context.flow.englishResult+\")\",\n        type:\"message\"\n    } \n};\n\nreturn newmsg;\n",
-    "outputs": 1,
-    "noerr": 0,
-    "x": 598.0556030273438,
-    "y": 524.3333740234375,
-    "wires": [
-      [
-        "c7699fbe.29754",
-        "d67f3cf4.93eb2"
+   },
+   {
+      "id":"1625bed2.bd4381",
+      "type":"debug",
+      "z":"5b3f91be.e31f7",
+      "name":"Debug",
+      "active":true,
+      "tosidebar":true,
+      "console":false,
+      "tostatus":false,
+      "complete":"payload",
+      "targetType":"msg",
+      "x":910,
+      "y":40,
+      "wires":[
+
       ]
-    ]
-  },
-  {
-    "id": "120cdffe.a59fb",
-    "type": "watson-translator",
-    "z": "5b3f91be.e31f7",
-    "name": "translator",
-    "action": "translate",
-    "basemodel": "en-nl",
-    "domain": "general",
-    "srclang": "en",
-    "destlang": "ru",
-    "password": "cV5vSP7sXY3F",
-    "apikey": "",
-    "custom": "",
-    "domainhidden": "general",
-    "srclanghidden": "en",
-    "destlanghidden": "ru",
-    "basemodelhidden": "en-nl",
-    "customhidden": "",
-    "filetype": "forcedglossary",
-    "trainid": "",
-    "lgparams2": true,
-    "neural": false,
-    "default-endpoint": true,
-    "service-endpoint": "https://gateway.watsonplatform.net/language-translator/api",
-    "x": 596.5,
-    "y": 461,
-    "wires": [
-      [
-        "495b5b4.619f0a4"
+   },
+   {
+      "id":"a7730542.c84018",
+      "type":"inject",
+      "z":"5b3f91be.e31f7",
+      "name":"",
+      "topic":"",
+      "payload":"",
+      "payloadType":"date",
+      "repeat":"",
+      "crontab":"",
+      "once":false,
+      "onceDelay":0.1,
+      "x":240,
+      "y":40,
+      "wires":[
+         [
+            "468159a7.c85068"
+         ]
       ]
-    ]
-  },
-  {
-    "id": "d67f3cf4.93eb2",
-    "type": "debug",
-    "z": "5b3f91be.e31f7",
-    "name": "",
-    "active": true,
-    "tosidebar": true,
-    "console": false,
-    "tostatus": false,
-    "complete": "false",
-    "x": 955,
-    "y": 523,
-    "wires": []
-  },
-  {
-    "id": "c51076e6.4270d8",
-    "type": "inject",
-    "z": "5b3f91be.e31f7",
-    "name": "",
-    "topic": "",
-    "payload": "",
-    "payloadType": "date",
-    "repeat": "",
-    "crontab": "",
-    "once": false,
-    "onceDelay": 0.1,
-    "x": 1020,
-    "y": 40,
-    "wires": [
-      []
-    ]
-  },
-  {
-    "id": "c054f5e7.925108",
-    "type": "debug",
-    "z": "5b3f91be.e31f7",
-    "name": "",
-    "active": true,
-    "tosidebar": true,
-    "console": false,
-    "tostatus": false,
-    "complete": "false",
-    "x": 900,
-    "y": 220,
-    "wires": []
-  },
-  {
-    "id": "768cfde9.9255b4",
-    "type": "inject",
-    "z": "5b3f91be.e31f7",
-    "name": "",
-    "topic": "",
-    "payload": "123",
-    "payloadType": "str",
-    "repeat": "",
-    "crontab": "",
-    "once": false,
-    "onceDelay": 0.1,
-    "x": 1190,
-    "y": 180,
-    "wires": [
-      [
-        "fed69474.a3ca88"
+   },
+   {
+      "id":"ecf3458e.c3fa68",
+      "type":"function",
+      "z":"5b3f91be.e31f7",
+      "name":"Очистить справочник сессий",
+      "func":"context.flow.mykeys = undefined\n",
+      "outputs":1,
+      "noerr":0,
+      "x":390,
+      "y":580,
+      "wires":[
+         [
+
+         ]
       ]
-    ]
-  },
-  {
-    "id": "fed69474.a3ca88",
-    "type": "debug",
-    "z": "5b3f91be.e31f7",
-    "name": "",
-    "active": true,
-    "tosidebar": true,
-    "console": false,
-    "tostatus": false,
-    "complete": "false",
-    "x": 1390,
-    "y": 280,
-    "wires": []
-  },
-  {
-    "id": "8f26eec9.545c",
-    "type": "debug",
-    "z": "5b3f91be.e31f7",
-    "name": "",
-    "active": true,
-    "tosidebar": true,
-    "console": false,
-    "tostatus": false,
-    "complete": "false",
-    "x": 1090,
-    "y": 100,
-    "wires": []
-  },
-  {
-    "id": "e913f44.a55b208",
-    "type": "telegram bot",
-    "z": "5b3f91be.e31f7",
-    "botname": "Pizzabot",
-    "usernames": "",
-    "chatids": "",
-    "baseapiurl": "",
-    "pollinterval": ""
-  }
+   },
+   {
+      "id":"8b8d43b4.af172",
+      "type":"inject",
+      "z":"5b3f91be.e31f7",
+      "name":"",
+      "topic":"",
+      "payload":"",
+      "payloadType":"date",
+      "repeat":"",
+      "crontab":"",
+      "once":false,
+      "onceDelay":0.1,
+      "x":120,
+      "y":580,
+      "wires":[
+         [
+            "ecf3458e.c3fa68"
+         ]
+      ]
+   },
+   {
+      "id":"f2d8c21a.a0d83",
+      "type":"watson-assistant-v2",
+      "z":"5b3f91be.e31f7",
+      "name":"Watson Assistant",
+      "default-endpoint":false,
+      "service-endpoint":"https://gateway.watsonplatform.net/assistant/api/",
+      "assistant_id":"b9fb37ca-d679-473a-b58a-f014df4f2121",
+      "debug":false,
+      "restart":false,
+      "return_context":true,
+      "alternate_intents":false,
+      "multisession":true,
+      "timeout":"",
+      "optout-learning":false,
+      "x":650,
+      "y":100,
+      "wires":[
+         [
+            "e011afb1.91904",
+            "7814c0d0.698bc"
+         ]
+      ]
+   },
+   {
+      "id":"468159a7.c85068",
+      "type":"function",
+      "z":"5b3f91be.e31f7",
+      "name":"хочу пиццу",
+      "func":"msg={}\nmsg.payload = {}\n\nmsg.payload.chatId=122334\nmsg.payload.messageId=1234\nmsg.payload.type=\"message\"\nmsg.payload.content=\"Хочу пиццу\"\n\nreturn msg;",
+      "outputs":1,
+      "noerr":0,
+      "x":410,
+      "y":40,
+      "wires":[
+         [
+            "c1d49100.49808"
+         ]
+      ]
+   },
+   {
+      "id":"e011afb1.91904",
+      "type":"function",
+      "z":"5b3f91be.e31f7",
+      "name":"Сохранить сессию",
+      "func":"msg.payload.chatId = context.flow.chatId;\nmsg.payload.type = context.flow.type;\n\n// Check if error is returned\nif (msg.watsonerror!==undefined) {\n    if(msg.watsonerror == \"Invalid Session\") {\n       node.warn(\"Reset the expired session...\");\n       context.flow.mykeys[msg.originalMessage.chat.id]=undefined;\n    } else {\n       node.warn(msg);\n    }\n}\n\n// Combine all responses together\na=msg.payload.output.generic\nmsg.payload.content=\"\"\na.forEach(function(element) {\n  msg.payload.content=msg.payload.content+element[\"text\"]+\" \";\n});\n\n// Always remember session\ncontext.flow.mykeys[msg.payload.chatId]=msg.payload.session_id;\n//node.warn(context);\n\nreturn msg;",
+      "outputs":1,
+      "noerr":0,
+      "x":660,
+      "y":160,
+      "wires":[
+         [
+            "c7699fbe.29754",
+            "c58487a5.00b738"
+         ]
+      ]
+   },
+   {
+      "id":"c58487a5.00b738",
+      "type":"debug",
+      "z":"5b3f91be.e31f7",
+      "name":"Debug",
+      "active":true,
+      "tosidebar":true,
+      "console":false,
+      "tostatus":false,
+      "complete":"payload.content",
+      "targetType":"msg",
+      "x":910,
+      "y":160,
+      "wires":[
+
+      ]
+   },
+   {
+      "id":"7814c0d0.698bc",
+      "type":"debug",
+      "z":"5b3f91be.e31f7",
+      "name":"Debug",
+      "active":true,
+      "tosidebar":false,
+      "console":false,
+      "tostatus":true,
+      "complete":"true",
+      "targetType":"full",
+      "x":910,
+      "y":100,
+      "wires":[
+
+      ]
+   },
+   {
+      "id":"e913f44.a55b208",
+      "type":"telegram bot",
+      "z":"5b3f91be.e31f7",
+      "botname":"Pizzabot",
+      "usernames":"",
+      "chatids":"",
+      "baseapiurl":"",
+      "pollinterval":""
+   }
 ]
