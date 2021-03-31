@@ -5746,7 +5746,7 @@
       "output": {
         "text": "Проблемы с денежным переводом"
       },
-      "conditions": "#02",
+      "conditions": "#02-денежный-перевод",
       "dialog_node": "dialog02",
       "previous_sibling": "dialog03"
     },
@@ -7140,8 +7140,7 @@
     },
     "system_entities": {
       "enabled": true
-    },
-    "spelling_auto_correct": true
+    }
   },
   "learning_opt_out": false,
   "name": "BankingBotRus",
