@@ -5712,11 +5712,11 @@
     }
   ],
   "entities": [],
-  "language": "en",
+  "language": "xx",
   "metadata": {
     "api_version": {
-      "major_version": "v1",
-      "minor_version": "2018-09-20"
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
     }
   },
   "skill_id": "2becfbd4-e731-4cb4-8192-f6b9aad8efed",
